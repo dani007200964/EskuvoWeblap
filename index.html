@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anita & Dani Esküvője</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="anita_and_dani.png" alt="Anita és Dani logó" class="logo">
+    </div>
+
+    <!-- Names -->
+    <h1 class="names">Anita & Dani</h1>
+
+    <!-- Date -->
+    <h2 class="date">2025.05.31</h2>
+
+    <!-- Image Gallery (Swiper.js) -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="image_1.png" alt="Esküvő kép 1"></div>
+            <div class="swiper-slide"><img src="image_2.png" alt="Esküvő kép 2"></div>
+            <div class="swiper-slide"><img src="image_3.png" alt="Esküvő kép 3"></div>
+        </div>
+        <!-- Add pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Divider Image -->
+    <div class="divider-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#F9F9F9"><rect fill="#FFE4E1" width="100%" height="100%"/><path d="M0 0h1000v4H0z"></path><path d="M0 0h1000v80.8S550 100 500 100 0 80.8 0 80.8V0Z" opacity=".2"></path><path d="M0 0h1000v61.6S600 100 500 100 0 61.6 0 61.6V0Z" opacity=".3"></path><path d="M0 0h1000v42.4S650 100 500 100 0 42.4 0 42.4V0Z" opacity=".4"></path><path d="M0 0h1000v23.2S700 100 500 100 0 23.2 0 23.2V0Z" opacity=".5"></path><path d="M0 0v4s250 96 500 96 500-96 500-96V0H0Z"></path></svg>
+    </div>
+
+    <!-- 'Mikor és hol?' Section -->
+    <section class="when-where-section">
+        <h2 class="section-title">Mikor és hol?</h2>
+        <p class="section-text">Az esküvő 2025. május 31-én kerül megrendezésre. A pontos helyszínek New Yorkban és Budapesten találhatók. Várunk szeretettel!</p>
+    </section>
+
+    <!-- Maps with iFrame -->
+    <div class="iframe-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2251.61971279447!2d18.454170899767647!3d45.870991377114116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d323b49410c67%3A0xf8da36485597d551!2zS8O6cmlhIFZpbGzDoW55LCBlc2vDvHbFkSDDqXMgcmVuZGV6dsOpbnkgaGVseXN6w61u!5e1!3m2!1shu!2shu!4v1727551504590!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3823.1703351176848!2d18.50572707699006!3d45.87417110599069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d2d927c9105af%3A0xb11bbd04c0036eba!2zU3plbnQgU2ltb24gw6lzIErDumTDoXMtdGVtcGxvbQ!5e1!3m2!1shu!2shu!4v1727553722379!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-container">
+        <h3>Esküvőig hátralévő idő:</h3>
+        <div id="countdown"></div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        
+        // Swiper initialization
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            slidesPerView: 1, // Mobile: show one slide
+            spaceBetween: 20,
+            breakpoints: {
+                // Show all three images on larger screens
+                768: {
+                    slidesPerView: 3, // Desktop/tablet: show 3 images
+                },
+            },
+        });
+        
+        // Countdown script
+        const weddingDate = new Date("2025-05-31T00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = days + " nap " + hours + " óra " +
+                minutes + " perc ";
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "Elérkezett a nagy nap!";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
